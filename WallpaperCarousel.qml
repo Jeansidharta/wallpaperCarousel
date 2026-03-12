@@ -15,6 +15,7 @@ PluginComponent {
     // WALLPAPER FOLDER — derived from the current DMS wallpaper path
     // -------------------------------------------------------------------------
     readonly property string wallpaperFolder: {
+		if (pluginData.wallpaperDir) return Paths.strip(pluginData.wallpaperDir);
         const p = SessionData.wallpaperPath;
         if (!p || p.startsWith("#"))
             return Paths.strip(Paths.pictures);
@@ -40,7 +41,7 @@ PluginComponent {
 
     FolderListModel {
         id: folderModel
-        folder: root.wallpaperFolderUrl
+        folder: root.wallpaperFolderUrl;
         nameFilters: ["*.jpg", "*.jpeg", "*.png", "*.webp", "*.gif",
                       "*.bmp", "*.jxl", "*.avif", "*.heif", "*.exr"]
         showDirs: false
